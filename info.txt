@@ -1,0 +1,41 @@
+https://www.linkedin.com/pulse/asil-automotive-safety-integrity-levels-ratings-animesh-sarkar
+
+https://medium.com/@samsorrahman/how-to-run-a-makefile-in-windows-b4d115d7c516
+
+
+compile using gcc
+gcc -o main .\main.c .\sub.c -Wall
+
+What will happen is that main.c will be turned into an object file (main.o), and sub.c will be turned into an object file (sub.o). Then the linker will link these two files together and that is where the display() function call in main.c is 'associated' with the function in sub.o.
+
+
+my_program:main.o sub.o
+	echo "Making the project"
+	gcc -o my_program main.o sub.o 
+
+main.o: main.c
+	gcc -c main.c
+
+sub.o: sub.c
+	gcc -c sub.c
+
+try make
+it will create output file my_program.exe
+
+Now make some changes to sub.c
+and again execute make
+And when you execute the my_program.exe, you will not be able to see the new changes you've made into sub.c
+
+
+Add two new lines in Makefile
+clean:
+	rm *.o my_program.exe
+	
+execute make clean
+
+You'll get error, becuase you are using rm in a non-POSIX system (Windows)
+make (e=2): The system cannot find the file specified.
+
+Modify the lines as shown below
+clean:
+	del *.o my_program.exe
