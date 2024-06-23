@@ -9,4 +9,4 @@ sub.o: sub.c
 	gcc -c sub.c
 
 clean:
-	rm *.o my_program.exe
+	del *.o my_program.exe
